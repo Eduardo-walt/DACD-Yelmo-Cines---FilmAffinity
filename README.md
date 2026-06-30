@@ -4,6 +4,15 @@ Proyecto multimódulo en Java 21 para la asignatura *Desarrollo de Aplicaciones 
 
 **Equipo:** Eduardo Sánchez Belchí
 
+## Índice
+1. [Descripción y propuesta de valor](#1-descripción-y-propuesta-de-valor)
+2. [Arquitectura del sistema](#2-arquitectura-del-sistema)
+3. [Arquitectura de aplicación](#3-arquitectura-de-aplicación-módulos)
+4. [Justificación de diseño](#4-justificación-de-diseño)
+5. [Principios y patrones](#5-principios-y-patrones-de-diseño-aplicados)
+6. [Ejecución](#9-ejecución-orden-obligatorio)
+7. [Ejemplos de uso](#10-ejemplos-de-uso-cli-de-business-unit)
+
 ## 1. Descripción y propuesta de valor
 
 El proyecto integra dos fuentes de datos independientes — cartelera de cines (Yelmo) y valoraciones de películas (FilmAffinity/TMDB) — en una arquitectura de eventos en tiempo real, permitiendo a un usuario final consultar de forma unificada qué películas tienen sesiones disponibles y cuál es su valoración crítica, sin tener que consultar dos fuentes por separado.
