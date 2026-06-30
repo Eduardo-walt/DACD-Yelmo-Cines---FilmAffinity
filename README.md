@@ -2,7 +2,7 @@
 
 Proyecto multimódulo en Java 21 para la asignatura *Desarrollo de Aplicaciones para Ciencia de Datos*. Grado en Ciencia e Ingeniería de Datos — ULPGC.
 
-**Equipo:** [PON AQUÍ TU NOMBRE COMPLETO Y EL DE TU COMPAÑERO/A]
+**Equipo:** [Eduardo Sánchez Belchí]
 
 ## 1. Descripción y propuesta de valor
 
@@ -199,8 +199,7 @@ REVIEWS (id, movie_id, user_review, review_date, captured_at)
 
 ## 13. Estado del proyecto
 
-- ✅ Sprint 1: captura y persistencia independiente — completo.
-- ✅ Sprint 2: arquitectura Publisher/Subscriber con ActiveMQ y Event Store — completo, verificado end-to-end.
-- ✅ Sprint 3: Business Unit con datamart, consumo en tiempo real e histórico, CLI — completo (versión mínima funcional).
+- Sprint 1: captura y persistencia independiente — completo.
+- Sprint 2: arquitectura Publisher/Subscriber con ActiveMQ y Event Store — completo, verificado end-to-end.
+- Sprint 3: Business Unit con datamart, consumo en tiempo real e histórico, CLI — completo (versión mínima funcional).
 
-- 
