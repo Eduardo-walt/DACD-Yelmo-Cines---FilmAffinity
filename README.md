@@ -2,7 +2,7 @@
 
 Proyecto multimódulo en Java 21 para la asignatura *Desarrollo de Aplicaciones para Ciencia de Datos*. Grado en Ciencia e Ingeniería de Datos — ULPGC.
 
-**Equipo:** [Eduardo Sánchez Belchí]
+**Equipo:** Eduardo Sánchez Belchí
 
 ## 1. Descripción y propuesta de valor
 
