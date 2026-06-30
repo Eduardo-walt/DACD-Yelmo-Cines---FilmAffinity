@@ -182,6 +182,7 @@ Cada línea es un evento JSON independiente (NDJSON):
 ```json
 {"ts":1782900000,"ss":"yelmo-feeder","topic":"Movie","payload":{"cinema":"premium-alisios","movie":"Dune: Part Two","time":"2026-06-30T18:30:00"}}
 ```
+<img width="1287" height="414" alt="image" src="https://github.com/user-attachments/assets/f4f2e164-fd84-44ff-a1d0-4bd7a36bd390" />
 
 ## 12. Bases de datos (Sprint 1)
 
