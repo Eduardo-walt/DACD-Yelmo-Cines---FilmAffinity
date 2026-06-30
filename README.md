@@ -49,14 +49,16 @@ El proyecto integra dos fuentes de datos independientes — cartelera de cines (
 4. El usuario consulta ese datamart a través de una CLI.
 
 ## 3. Arquitectura de aplicación (módulos)
-```
-cinema-data-integration/
-├── pom.xml                       (padre, gestiona el multimódulo)
-├── yelmo-module/                 (Sprint 1 + 2: captura y publicación)
-├── filmaffinity-module/          (Sprint 1 + 2: captura y publicación)
-├── event-store-module/           (Sprint 2: persistencia de eventos)
-├── business-unit-module/         (Sprint 3: explotación de datos)
-└── eventstore/                   (datos generados, NDJSON)
+
+```mermaid
+flowchart TD
+    A[Yelmo Module<br/>Feeder/Publisher] -->|topic: Movie| C[ActiveMQ Broker]
+    B[FilmAffinity Module<br/>Feeder/Publisher] -->|topic: Review| C
+    C -->|durable sub| D[Event Store Builder]
+    D --> E[(eventstore/topic/ss/YYYYMMDD.events)]
+    E --> F[Business Unit<br/>Datamart en memoria]
+    C -->|durable sub, tiempo real| F
+    F --> G[CLI]
 ```
 
 ### Componentes por módulo (Yelmo / FilmAffinity)
