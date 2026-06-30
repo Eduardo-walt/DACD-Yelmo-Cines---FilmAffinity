@@ -11,34 +11,36 @@ El proyecto integra dos fuentes de datos independientes — cartelera de cines (
 **Propuesta de valor:** ayudar al usuario a decidir qué película ver combinando disponibilidad de sesiones (horarios, cines, formato) con la calidad percibida de la película (valoraciones y reseñas), centralizando ambas señales en un único punto de consulta.
 
 ## 2. Arquitectura del sistema
+```
 ┌─────────────────┐     ┌──────────────────────┐
 │  Yelmo Module    │     │ FilmAffinity Module   │
 │  (Feeder/Pub)    │     │  (Feeder/Pub)          │
 │  scraping cartelera│   │  TMDB API ratings      │
 └────────┬─────────┘     └──────────┬─────────────┘
-│ topic: Movie             │ topic: Review
-▼                          ▼
-┌─────────────────────────────────────┐
-│         ActiveMQ (broker)            │
-└────────────────┬──────────────────┬─┘
-│ durable sub      │ durable sub
-▼                  ▼
-┌────────────────────────────────┐
-│     Event Store Builder         │
-│  (subscriber, persiste en disco)│
-└────────────────┬────────────────┘
-▼
-eventstore/{topic}/{ss}/{YYYYMMDD}.events
-│
-▼
-┌─────────────────────────┐
-│     Business Unit         │
-│ (datamart en memoria +    │
-│  consumo tiempo real +    │
-│  lectura histórico)       │
-└────────────┬───────────────┘
-▼
-CLI (consultas)
+         │ topic: Movie             │ topic: Review
+         ▼                          ▼
+   ┌─────────────────────────────────────┐
+   │         ActiveMQ (broker)            │
+   └────────────────┬──────────────────┬─┘
+                     │ durable sub      │ durable sub
+                     ▼                  ▼
+         ┌────────────────────────────────┐
+         │     Event Store Builder         │
+         │  (subscriber, persiste en disco)│
+         └────────────────┬────────────────┘
+                           ▼
+              eventstore/{topic}/{ss}/{YYYYMMDD}.events
+                           │
+                           ▼
+              ┌─────────────────────────┐
+              │     Business Unit         │
+              │ (datamart en memoria +    │
+              │  consumo tiempo real +    │
+              │  lectura histórico)       │
+              └────────────┬───────────────┘
+                            ▼
+                      CLI (consultas)
+```
 
 **Flujo de datos:**
 1. Los feeders (Yelmo, FilmAffinity) capturan datos de sus fuentes externas, los persisten en su propia base SQLite, y publican un evento por cada registro al broker ActiveMQ.
@@ -47,6 +49,7 @@ CLI (consultas)
 4. El usuario consulta ese datamart a través de una CLI.
 
 ## 3. Arquitectura de aplicación (módulos)
+```
 cinema-data-integration/
 ├── pom.xml                       (padre, gestiona el multimódulo)
 ├── yelmo-module/                 (Sprint 1 + 2: captura y publicación)
@@ -54,6 +57,7 @@ cinema-data-integration/
 ├── event-store-module/           (Sprint 2: persistencia de eventos)
 ├── business-unit-module/         (Sprint 3: explotación de datos)
 └── eventstore/                   (datos generados, NDJSON)
+```
 
 ### Componentes por módulo (Yelmo / FilmAffinity)
 
