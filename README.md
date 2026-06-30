@@ -70,6 +70,59 @@ flowchart TD
     F --> G[CLI]
 ```
 
+## Diagrama de clases (simplificado)
+
+```mermaid
+classDiagram
+    class EventMessage {
+        +long ts
+        +String ss
+        +String topic
+        +JsonObject payload
+    }
+    class EventStorage {
+        <<interface>>
+        +store(EventMessage) void
+    }
+    class FileSystemEventStorage {
+        +store(EventMessage) void
+    }
+    class EventStoreBuilder {
+        -EventStorage storage
+        +process(Message) void
+        +runForever() void
+    }
+    class ShowtimeFeeder {
+        <<interface>>
+        +fetchShowtimes() List
+    }
+    class YelmoShowtimeFeeder {
+        -YelmoPublisher publisher
+        +fetchShowtimes() List
+    }
+    class ReviewFeeder {
+        <<interface>>
+        +fetchAllReviews() List
+    }
+    class FilmAffinityReviewFeeder {
+        -FilmAffinityPublisher publisher
+        +fetchAllReviews() List
+    }
+    class BusinessUnit {
+        -Map datamart
+        +loadHistoricalEvents() void
+        +subscribeRealtime() void
+        +runCli() void
+    }
+
+    EventStorage <|.. FileSystemEventStorage
+    EventStoreBuilder --> EventStorage
+    EventStoreBuilder --> EventMessage
+    ShowtimeFeeder <|.. YelmoShowtimeFeeder
+    ReviewFeeder <|.. FilmAffinityReviewFeeder
+    BusinessUnit --> EventMessage
+```
+
 ### Componentes por módulo (Yelmo / FilmAffinity)
 
 | Componente | Responsabilidad |
